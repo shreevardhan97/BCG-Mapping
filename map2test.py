@@ -82,7 +82,7 @@ image = Image.open('./logo.png')
 # st.markdown("<h4 style='text-align: left; color: black;'>School GIS Mapping</h4>", unsafe_allow_html=True)
 #add bcg logo on top of the sidebar
 image = Image.open('./logo.png')
-st.image(image, width=50)
+st.image(image, width=100)
 #add a footer with texts
 st.sidebar.markdown("<h4 style='text-align: left; color: black;'>Developed by: BCG Social Impact</h4>", unsafe_allow_html=True)
 
