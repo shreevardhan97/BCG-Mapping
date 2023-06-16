@@ -83,48 +83,52 @@ st.markdown("<h4 style='text-align: left; color: black;'>School GIS Mapping</h4>
 #add bcg logo on top of the sidebar
 image = Image.open('./logo.png')
 st.sidebar.image(image, width=100)
-st.sidebar.markdown("<h4 style='text-align: left; color: black;'>School GIS Mapping</h4>", unsafe_allow_html=True)
 #add a footer with texts
 st.sidebar.markdown("<h4 style='text-align: left; color: black;'>Developed by: BCG Social Impact</h4>", unsafe_allow_html=True)
 
 
+def school_maps():
 #add columns
-col1, col2 = st.columns([1, 1])
+    col1, col2 = st.columns([1, 1])
 
-district = col1.selectbox('Select District', df2temp['features__attributes__dtname'].unique())
-df2 = filter_district(df2temp, district)
+    district = col1.selectbox('Select District', df2temp['features__attributes__dtname'].unique())
+    df2 = filter_district(df2temp, district)
 
-#select school type and have all as an option
-school_type = col2.selectbox('Select School Type', df2['features__attributes__school_typ'].unique())
-df2 = filter_school_type(df2, school_type)
+    #select school type and have all as an option
+    school_type = col2.selectbox('Select School Type', df2['features__attributes__school_typ'].unique())
+    df2 = filter_school_type(df2, school_type)
 
-#add a button to reset the filters
-if st.button('Reset Filters'):
-    df2 = df2temp
-    df2['LAT'] = df2['features__attributes__latitude']
-    df2['LON'] = df2['features__attributes__longitude']
+    #add a button to reset the filters
+    if st.button('Reset Filters'):
+        df2 = df2temp
+        df2['LAT'] = df2['features__attributes__latitude']
+        df2['LON'] = df2['features__attributes__longitude']
 
-m = folium.Map(location=[df2['LAT'].mean(), df2['LON'].mean()], zoom_start=10)
-#let the map cover the whole screen
-folium.TileLayer('cartodbpositron').add_to(m)
+    m = folium.Map(location=[df2['LAT'].mean(), df2['LON'].mean()], zoom_start=10)
+    #let the map cover the whole screen
+    folium.TileLayer('cartodbpositron').add_to(m)
 
-for i in range(0,len(df2)):
-    mypopup = "School Name:{} \n Type:{} \n Management:{} \n Location:{} \n Pincode:{}".format(df2.iloc[i]['features__attributes__schname'], df2.iloc[i]['features__attributes__school_typ'], df2.iloc[i]['features__attributes__management'], df2.iloc[i]['features__attributes__sdtname'], df2.iloc[i]['features__attributes__pincode'])
-    html = '''
-    <h3>School Name:{}</h3>
-    <p>Type:{}</p>
-    <p>Management:{}</p>
-    <p>Location:{}</p>
-    <p>Pincode:{}</p>
-    '''.format(df2.iloc[i]['features__attributes__schname'], df2.iloc[i]['features__attributes__school_typ'], df2.iloc[i]['features__attributes__management'], df2.iloc[i]['features__attributes__sdtname'], df2.iloc[i]['features__attributes__pincode'])
-    iframe = folium.IFrame(html=html, width=200, height=200)
-    folium.Marker(
-        location=[df2.iloc[i]['LAT'], df2.iloc[i]['LON']],
-        popup=folium.Popup(iframe, max_width=200),
-        icon=folium.Icon(color='blue', icon='info-sign')
-    ).add_to(m)
-folium_static(m)
+    for i in range(0,len(df2)):
+        mypopup = "School Name:{} \n Type:{} \n Management:{} \n Location:{} \n Pincode:{}".format(df2.iloc[i]['features__attributes__schname'], df2.iloc[i]['features__attributes__school_typ'], df2.iloc[i]['features__attributes__management'], df2.iloc[i]['features__attributes__sdtname'], df2.iloc[i]['features__attributes__pincode'])
+        html = '''
+        <h3>School Name:{}</h3>
+        <p>Type:{}</p>
+        <p>Management:{}</p>
+        <p>Location:{}</p>
+        <p>Pincode:{}</p>
+        '''.format(df2.iloc[i]['features__attributes__schname'], df2.iloc[i]['features__attributes__school_typ'], df2.iloc[i]['features__attributes__management'], df2.iloc[i]['features__attributes__sdtname'], df2.iloc[i]['features__attributes__pincode'])
+        iframe = folium.IFrame(html=html, width=200, height=200)
+        folium.Marker(
+            location=[df2.iloc[i]['LAT'], df2.iloc[i]['LON']],
+            popup=folium.Popup(iframe, max_width=200),
+            icon=folium.Icon(color='blue', icon='info-sign')
+        ).add_to(m)
+    folium_static(m)
 
+page_to_show = {
+    "School Maps": school_maps,
+}
+st.sidebar.selectbox("Go to", tuple(page_to_show.keys()))()
 
 
 
