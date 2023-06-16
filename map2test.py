@@ -128,7 +128,9 @@ def school_maps():
 page_to_show = {
     "School Maps": school_maps,
 }
-st.sidebar.selectbox("Go to", tuple(page_to_show.keys()))()
+name_page = st.sidebar.selectbox("Go to", page_to_show.keys())
+page_to_show[name_page]()
+
 
 
 
