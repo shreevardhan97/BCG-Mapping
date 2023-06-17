@@ -141,12 +141,7 @@ def school_maps():
     m = folium.Map(location=[df2['LAT'].mean(), df2['LON'].mean()], zoom_start=10)
     #let the map cover the whole screen
     folium.TileLayer('cartodbpositron').add_to(m)
-    #highlight the selected district
-    folium.GeoJson(
-        df2,
-        name='geojson'
-    ).add_to(m)
-
+  
 
 
     for i in range(0,len(df2)):
