@@ -5,14 +5,42 @@ import streamlit as st
 
 # %%
 #read csv
-df = pd.read_csv('./Sangrur/result.csv')
-df.head()
-#show all columns
-pd.set_option('display.max_columns', None)
-df.head()
-df_a = pd.read_csv('./Sangrur/result2.csv')
-#show features
-df2tempa = df[['features__attributes__objectid', 'features__attributes__schcd',
+# df = pd.read_csv('./Sangrur/result.csv')
+# df.head()
+# #show all columns
+# pd.set_option('display.max_columns', None)
+# df.head()
+# df_a = pd.read_csv('./Sangrur/result2.csv')
+# #show features
+# df2tempa = df[['features__attributes__objectid', 'features__attributes__schcd',
+#        'features__attributes__schname', 'features__attributes__schcat',
+#        'features__attributes__school_cat', 'features__attributes__schtype',
+#        'features__attributes__school_typ', 'features__attributes__schmgt',
+#        'features__attributes__management', 'features__attributes__rururb',
+#        'features__attributes__location', 'features__attributes__pincode',
+#        'features__attributes__dtname', 'features__attributes__udise_stco',
+#        'features__attributes__stname', 'features__attributes__vilname',
+#        'features__attributes__longitude', 'features__attributes__latitude',
+#        'features__attributes__stcode11', 'features__attributes__dtcode11',
+#        'features__attributes__sdtcode11', 'features__attributes__sdtname',
+#        'features__geometry__x', 'features__geometry__y']]
+# df2tempb = df_a[['features__attributes__objectid', 'features__attributes__schcd',
+#        'features__attributes__schname', 'features__attributes__schcat',
+#        'features__attributes__school_cat', 'features__attributes__schtype',
+#        'features__attributes__school_typ', 'features__attributes__schmgt',
+#        'features__attributes__management', 'features__attributes__rururb',
+#        'features__attributes__location', 'features__attributes__pincode',
+#        'features__attributes__dtname', 'features__attributes__udise_stco',
+#        'features__attributes__stname', 'features__attributes__vilname',
+#        'features__attributes__longitude', 'features__attributes__latitude',
+#        'features__attributes__stcode11', 'features__attributes__dtcode11',
+#        'features__attributes__sdtcode11', 'features__attributes__sdtname',
+#        'features__geometry__x', 'features__geometry__y']]
+
+#read all csv and concat
+def read_csv_and_concat(file_path):
+    df = pd.read_csv(file_path)
+    df2temp = df[['features__attributes__objectid', 'features__attributes__schcd',
        'features__attributes__schname', 'features__attributes__schcat',
        'features__attributes__school_cat', 'features__attributes__schtype',
        'features__attributes__school_typ', 'features__attributes__schmgt',
@@ -24,19 +52,23 @@ df2tempa = df[['features__attributes__objectid', 'features__attributes__schcd',
        'features__attributes__stcode11', 'features__attributes__dtcode11',
        'features__attributes__sdtcode11', 'features__attributes__sdtname',
        'features__geometry__x', 'features__geometry__y']]
-df2tempb = df_a[['features__attributes__objectid', 'features__attributes__schcd',
-       'features__attributes__schname', 'features__attributes__schcat',
-       'features__attributes__school_cat', 'features__attributes__schtype',
-       'features__attributes__school_typ', 'features__attributes__schmgt',
-       'features__attributes__management', 'features__attributes__rururb',
-       'features__attributes__location', 'features__attributes__pincode',
-       'features__attributes__dtname', 'features__attributes__udise_stco',
-       'features__attributes__stname', 'features__attributes__vilname',
-       'features__attributes__longitude', 'features__attributes__latitude',
-       'features__attributes__stcode11', 'features__attributes__dtcode11',
-       'features__attributes__sdtcode11', 'features__attributes__sdtname',
-       'features__geometry__x', 'features__geometry__y']]
-df2temp = pd.concat([df2tempa, df2tempb]).drop_duplicates()
+    return df2temp
+
+# df2tempa = read_csv_and_concat('./Sangrur/result.csv')
+# df2tempb = read_csv_and_concat('./Sangrur/result2.csv')
+# df2tempc = read_csv_and_concat('./Sangrur/result3.csv')
+
+#read all files from Sangrur folder and read csv and concat and add to a list
+dfs = []
+#read all files from Sangrur folder and read csv and concat and add to a list
+import os
+for file in os.listdir('./Sangrur'):
+    if file.endswith('.csv'):
+        dfs.append(read_csv_and_concat('./Sangrur/' + file))
+
+df2temp = pd.concat(dfs).drop_duplicates()
+
+# df2temp = pd.concat([df2tempa, df2tempb]).drop_duplicates()
 #merge both df without 
 # %%
 # filter out district with name sangrur
