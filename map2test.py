@@ -54,6 +54,16 @@ def read_csv_and_concat(file_path):
        'features__geometry__x', 'features__geometry__y']]
     return df2temp
 
+def read_block(district):
+    district = district.upper()
+    path = "./blocks/LUDHIANA.xlsx"
+    df = pd.read_excel(path)
+    #make sure to include all columns
+    #filter district
+    df = df[df['School Wise / Trade Wise Enrollment'] == district]
+    return df
+    
+
 # df2tempa = read_csv_and_concat('./Sangrur/result.csv')
 # df2tempb = read_csv_and_concat('./Sangrur/result2.csv')
 # df2tempc = read_csv_and_concat('./Sangrur/result3.csv')
@@ -132,11 +142,27 @@ def school_maps():
     school_type = col2.selectbox('Select School Type', df2['features__attributes__school_typ'].unique())
     df2 = filter_school_type(df2, school_type)
 
+    col1, col2 = st.columns([1, 1])
     #add a button to reset the filters
-    if st.button('Reset Filters'):
-        df2 = df2temp
-        df2['LAT'] = df2['features__attributes__latitude']
-        df2['LON'] = df2['features__attributes__longitude']
+    if col1.button('Reset Filters'):
+        df2 = filter_district(df2temp, district)
+        # df2['LAT'] = df2['features__attributes__latitude']
+        # df2['LON'] = df2['features__attributes__longitude']
+
+    #add a button to show block wise data of the district
+    if col2.button('Show Block Wise Data'):
+        df_block = read_block(district)
+        df_block.fillna(0, inplace=True)
+        #merge with key as school name remove everything else
+        df2= df_block.merge(df2, left_on='Unnamed: 3', right_on='features__attributes__schname', how='left')
+        #if none in lat and lon them remove column
+        #first count how many lat or lon are none
+        st.write("Schools not scraped: {}".format(df2['LAT'].isna().sum()))
+        df2.dropna(subset=['LAT', 'LON'], inplace=True)
+        #st.write(df2)
+        #convert all none to 0
+
+
 
     m = folium.Map(location=[df2['LAT'].mean(), df2['LON'].mean()], zoom_start=10)
     #let the map cover the whole screen
@@ -157,7 +183,7 @@ def school_maps():
         folium.Marker(
             location=[df2.iloc[i]['LAT'], df2.iloc[i]['LON']],
             popup=folium.Popup(iframe, max_width=200),
-            icon=folium.Icon(color='blue', icon='info-sign')
+            icon=folium.Icon(color='green', icon='info-sign')
         ).add_to(m)
     folium_static(m)
 
