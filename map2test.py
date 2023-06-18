@@ -205,6 +205,8 @@ def pandas_AI():
     from pandasai.llm.openai import OpenAI
     llm = OpenAI(api_token=gpt_key)
     pandas_ai = PandasAI(llm)
+    #welcome message for pandasai and how to use it
+    st.write("Welcome to AnalysisAI. It can answer questions about your data, generate plots, and more. To use it, simply type a question about your data in the box below and press enter.")
     st.write(df)
     #get the text from the user
     text = st.text_input('Enter your question')
