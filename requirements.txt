@@ -5,3 +5,4 @@ streamlit_folium
 openpyxl
 pandasai
 matplotlib
+openai
