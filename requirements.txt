@@ -1,4 +1,5 @@
 folium
 pandas
 numpy
-streamlit_folium
+streamlit_folium.
+openpyxl
