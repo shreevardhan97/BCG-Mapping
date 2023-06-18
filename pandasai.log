@@ -1,0 +1,271 @@
+2023-06-19 01:01:24 [INFO] Running PandasAI with openai LLM...
+2023-06-19 01:01:24 [INFO] Prompt ID: c5707b17-4f28-4acc-8b9e-f5028582f36d
+2023-06-19 01:01:32 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+
+# read the dataframe from a csv file
+df = pd.read_csv('data.csv')
+
+# print the shape of the dataframe
+print("Shape of the dataframe:", df.shape)
+
+# print the column names of the dataframe
+print("Column names of the dataframe:", list(df.columns))
+
+# print the data types of the columns
+print("Data types of the columns:\n", df.dtypes)
+
+# print the first 5 rows of the dataframe
+print("First 5 rows of the dataframe:\n", df.head())
+                        ```
+                    
+2023-06-19 01:01:32 [INFO] 
+Code running:
+```
+print('Shape of the dataframe:', df.shape)
+print('Column names of the dataframe:', list(df.columns))
+print('Data types of the columns:\n', df.dtypes)
+print('First 5 rows of the dataframe:\n', df.head())
+```
+2023-06-19 01:01:32 [INFO] Answer: ('First 5 rows of the dataframe:\n',   DISTRICT_NAME Block Name        School_Name   UDISECode  ...  12th Boys.16  XII Total.16  XI-XII Total.16 Total.17
+0     AMRITSAR    AJNALA-1        GSSS AJNALA  3020100103  ...           NaN           NaN              NaN      NaN
+1     AMRITSAR    AJNALA-1  GSSS AJNALA GIRLS  3020100104  ...           NaN           NaN              NaN      NaN
+2     AMRITSAR    AJNALA-1      GSSS CHAMIARI  3020102402  ...           NaN           NaN              NaN      NaN
+3     AMRITSAR    AJNALA-1     GSSS KIYAM PUR  3020101002  ...           NaN           NaN              NaN      NaN
+4     AMRITSAR    AJNALA-1        GSSS SUDHAR  3020105002  ...           NaN           NaN              NaN      NaN
+
+[5 rows x 380 columns])
+2023-06-19 01:02:00 [INFO] Running PandasAI with openai LLM...
+2023-06-19 01:02:00 [INFO] Prompt ID: 0c1be3c5-2ce5-4d0d-af4e-af968475dfcd
+2023-06-19 01:02:08 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataframe
+df = pd.read_csv('data.csv')
+
+# Filter the dataframe to only include Sangrur District
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+
+# Get the count of each trade offered in Sangrur District
+trade_counts = sangrur_df.iloc[:, 7:].count().sort_values(ascending=False)
+
+# Create a bar plot of the trade counts
+plt.bar(trade_counts.index, trade_counts.values)
+plt.xticks(rotation=90)
+plt.xlabel('Trade')
+plt.ylabel('Count')
+plt.title('Trades Offered in Sangrur District')
+plt.show()
+                        ```
+                    
+2023-06-19 01:02:08 [INFO] 
+Code running:
+```
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+trade_counts = sangrur_df.iloc[:, 7:].count().sort_values(ascending=False)
+plt.bar(trade_counts.index, trade_counts.values)
+plt.xticks(rotation=90)
+plt.xlabel('Trade')
+plt.ylabel('Count')
+plt.title('Trades Offered in Sangrur District')
+plt.show()
+plt.close('all')
+```
+2023-06-19 01:02:09 [INFO] Answer: None
+2023-06-19 01:02:48 [INFO] Running PandasAI with openai LLM...
+2023-06-19 01:02:48 [INFO] Prompt ID: 2f55a6ff-eb04-4035-a99f-0f0a8f7a1f91
+2023-06-19 01:02:56 [INFO] 
+                        Code generated:
+                        ```
+                        # First, we filter the dataframe to only include schools in Sangrur district
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+
+# Next, we find the school with the largest number of students in the latest year (Total.17)
+largest_school = sangrur_df.loc[sangrur_df['Total.17'].idxmax()]
+
+# Finally, we print the name of the largest school
+print(largest_school['School_Name'])
+                        ```
+                    
+2023-06-19 01:02:56 [INFO] 
+Code running:
+```
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+largest_school = sangrur_df.loc[sangrur_df['Total.17'].idxmax()]
+print(largest_school['School_Name'])
+```
+2023-06-19 01:02:56 [INFO] Answer: GSSS BAGHROUL
+2023-06-19 01:03:19 [INFO] Running PandasAI with openai LLM...
+2023-06-19 01:03:19 [INFO] Prompt ID: 5c829b18-b259-438c-9495-5b67d68d1014
+2023-06-19 01:03:24 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+
+# read the dataframe
+df = pd.read_csv('data.csv')
+
+# filter for Sangrur district
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+
+# find the largest school by total students
+largest_school = sangrur_df.loc[sangrur_df['Total.17'].idxmax()]
+
+# print the school name and total students
+print("The largest school in Sangrur is", largest_school['School_Name'], "with", largest_school['Total.17'], "students.")
+                        ```
+                    
+2023-06-19 01:03:24 [INFO] 
+Code running:
+```
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+largest_school = sangrur_df.loc[sangrur_df['Total.17'].idxmax()]
+print('The largest school in Sangrur is', largest_school['School_Name'],
+    'with', largest_school['Total.17'], 'students.')
+```
+2023-06-19 01:03:25 [INFO] Answer: The largest school in Sangrur is GSSS BAGHROUL with 24.0 students.
+
+2023-06-19 01:06:43 [INFO] Running PandasAI with openai LLM...
+2023-06-19 01:06:43 [INFO] Prompt ID: a93f64e5-3440-4eb6-964f-791d7fc88ca1
+2023-06-19 01:06:51 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+
+# read the csv file into a pandas dataframe
+df = pd.read_csv('data.csv')
+
+# filter the dataframe to only include schools in Sangrur district
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+
+# create a new column for total students by adding up all the student columns
+sangrur_df['Total Students'] = sangrur_df.iloc[:, 7:].sum(axis=1)
+
+# find the school with the largest number of total students
+largest_school = sangrur_df.loc[sangrur_df['Total Students'].idxmax(), 'School_Name']
+
+print(largest_school)
+                        ```
+                    
+2023-06-19 01:06:51 [INFO] 
+Code running:
+```
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+sangrur_df['Total Students'] = sangrur_df.iloc[:, 7:].sum(axis=1)
+largest_school = sangrur_df.loc[sangrur_df['Total Students'].idxmax(),
+    'School_Name']
+print(largest_school)
+```
+2023-06-19 01:06:51 [INFO] Answer: SHAHEED UDHAM SINGH GOVERNMENT GIRLS SENIOR SECONDARY SCHOOL, SUNAM UDHAM SINGH WALA
+2023-06-19 01:08:47 [INFO] Running PandasAI with openai LLM...
+2023-06-19 01:08:47 [INFO] Prompt ID: edbecfe4-9d28-4877-898b-85a54bca9cc9
+2023-06-19 01:08:55 [INFO] 
+                        Code generated:
+                        ```
+                        # First, we need to filter the dataframe to only include schools in Sangrur district
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+
+# Next, we need to find the column that contains information about trades offered
+# We can do this by looking for columns that contain the string "Trade" in their name
+trade_cols = [col for col in sangrur_df.columns if 'Trade' in col]
+
+# Now we can sum up the number of students enrolled in each trade across all schools in Sangrur
+trade_counts = sangrur_df[trade_cols].sum()
+
+# Finally, we can find the trade with the highest enrollment
+most_common_trade = trade_counts.idxmax()
+
+print("The trade mostly offered in Sangrur is:", most_common_trade)
+                        ```
+                    
+2023-06-19 01:08:55 [INFO] 
+Code running:
+```
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+trade_cols = [col for col in sangrur_df.columns if 'Trade' in col]
+trade_counts = sangrur_df[trade_cols].sum()
+most_common_trade = trade_counts.idxmax()
+print('The trade mostly offered in Sangrur is:', most_common_trade)
+```
+2023-06-19 01:09:05 [INFO] Answer: There are no trade columns in the Sangrur dataframe.
+2023-06-19 01:13:48 [INFO] Running PandasAI with openai LLM...
+2023-06-19 01:13:48 [INFO] Prompt ID: 1b86640d-22e5-490e-ad81-0b52ae75a42d
+2023-06-19 01:13:48 [INFO] Using cached response
+2023-06-19 01:13:48 [INFO] 
+Code running:
+```
+print('Shape of the dataframe:', df.shape)
+print('Column names of the dataframe:', list(df.columns))
+print('Data types of the columns:\n', df.dtypes)
+print('First 5 rows of the dataframe:\n', df.head())
+```
+2023-06-19 01:13:49 [INFO] Answer: ('First 5 rows of the dataframe:\n',   DISTRICT_NAME Block Name        School_Name   UDISECode  ...  12th Boys.16  XII Total.16  XI-XII Total.16 Total.17
+0     AMRITSAR    AJNALA-1        GSSS AJNALA  3020100103  ...           NaN           NaN              NaN      NaN
+1     AMRITSAR    AJNALA-1  GSSS AJNALA GIRLS  3020100104  ...           NaN           NaN              NaN      NaN
+2     AMRITSAR    AJNALA-1      GSSS CHAMIARI  3020102402  ...           NaN           NaN              NaN      NaN
+3     AMRITSAR    AJNALA-1     GSSS KIYAM PUR  3020101002  ...           NaN           NaN              NaN      NaN
+4     AMRITSAR    AJNALA-1        GSSS SUDHAR  3020105002  ...           NaN           NaN              NaN      NaN
+
+[5 rows x 380 columns])
+2023-06-19 01:18:46 [INFO] Running PandasAI with openai LLM...
+2023-06-19 01:18:46 [INFO] Prompt ID: a18a7f1b-12c1-4ab8-97b6-8f9d951f78fb
+2023-06-19 01:18:46 [INFO] Using cached response
+2023-06-19 01:18:46 [INFO] 
+Code running:
+```
+print('Shape of the dataframe:', df.shape)
+print('Column names of the dataframe:', list(df.columns))
+print('Data types of the columns:\n', df.dtypes)
+print('First 5 rows of the dataframe:\n', df.head())
+```
+2023-06-19 01:18:46 [INFO] Answer: ('First 5 rows of the dataframe:\n',   DISTRICT_NAME Block Name        School_Name   UDISECode  ...  12th Boys.16  XII Total.16  XI-XII Total.16 Total.17
+0     AMRITSAR    AJNALA-1        GSSS AJNALA  3020100103  ...           NaN           NaN              NaN      NaN
+1     AMRITSAR    AJNALA-1  GSSS AJNALA GIRLS  3020100104  ...           NaN           NaN              NaN      NaN
+2     AMRITSAR    AJNALA-1      GSSS CHAMIARI  3020102402  ...           NaN           NaN              NaN      NaN
+3     AMRITSAR    AJNALA-1     GSSS KIYAM PUR  3020101002  ...           NaN           NaN              NaN      NaN
+4     AMRITSAR    AJNALA-1        GSSS SUDHAR  3020105002  ...           NaN           NaN              NaN      NaN
+
+[5 rows x 380 columns])
+2023-06-19 01:19:23 [INFO] Running PandasAI with openai LLM...
+2023-06-19 01:19:23 [INFO] Prompt ID: f8757ad3-0736-4abc-b36f-6b88c9304bd3
+2023-06-19 01:19:33 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+import matplotlib.pyplot as plt
+
+# Read the dataframe
+df = pd.read_csv('data.csv')
+
+# Filter the data for Sangrur district
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+
+# Sort the schools by total number of students and select top 5
+top_5_schools = sangrur_df.sort_values(by='Total.17', ascending=False).head(5)
+
+# Plot histogram of total number of students for top 5 schools
+plt.hist(top_5_schools['Total.17'])
+plt.xlabel('Total Number of Students')
+plt.ylabel('Frequency')
+plt.title('Histogram of Top 5 Schools in Sangrur')
+plt.show()
+                        ```
+                    
+2023-06-19 01:19:33 [INFO] 
+Code running:
+```
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+top_5_schools = sangrur_df.sort_values(by='Total.17', ascending=False).head(5)
+plt.hist(top_5_schools['Total.17'])
+plt.xlabel('Total Number of Students')
+plt.ylabel('Frequency')
+plt.title('Histogram of Top 5 Schools in Sangrur')
+plt.show()
+plt.close('all')
+```
+2023-06-19 01:19:33 [INFO] Answer: None

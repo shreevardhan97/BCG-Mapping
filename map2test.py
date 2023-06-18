@@ -2,6 +2,8 @@
 import pandas as pd
 import numpy as np
 import streamlit as st
+import openai
+from pandasai import PandasAI
 
 # %%
 #read csv
@@ -57,10 +59,11 @@ def read_csv_and_concat(file_path):
 def read_block(district):
     district = district.upper()
     path = "./blocks/LUDHIANA.xlsx"
-    df = pd.read_excel(path)
+    df = pd.read_excel(path,sheet_name='Database', header=1)
     #make sure to include all columns
     #filter district
-    df = df[df['School Wise / Trade Wise Enrollment'] == district]
+    # st.write(df)
+    df = df[df['DISTRICT_NAME'] == district]
     return df
     
 
@@ -154,15 +157,19 @@ def school_maps():
         df_block = read_block(district)
         df_block.fillna(0, inplace=True)
         #merge with key as school name remove everything else
-        df2= df_block.merge(df2, left_on='Unnamed: 3', right_on='features__attributes__schname', how='left')
+        df2= df_block.merge(df2, left_on='School_Name', right_on='features__attributes__schname', how='left')
         #if none in lat and lon them remove column
         #first count how many lat or lon are none
         st.write("Schools not scraped: {}".format(df2['LAT'].isna().sum()))
         df2.dropna(subset=['LAT', 'LON'], inplace=True)
+        #filter by nsqf and vocational or both
+        
+
+        
         #st.write(df2)
         #convert all none to 0
 
-
+    # st.write(df2)
 
     m = folium.Map(location=[df2['LAT'].mean(), df2['LON'].mean()], zoom_start=10)
     #let the map cover the whole screen
@@ -187,8 +194,31 @@ def school_maps():
         ).add_to(m)
     folium_static(m)
 
+import matplotlib.pyplot as plt
+def pandas_AI():
+    #get gpt api key
+    gpt_key = st.secrets['gpt_key']
+    # Sample DataFrame
+    path = './blocks/LUDHIANA.xlsx'
+    df = pd.read_excel(path,sheet_name='Database', header=1)
+    # Instantiate a LLM
+    from pandasai.llm.openai import OpenAI
+    llm = OpenAI(api_token=gpt_key)
+    pandas_ai = PandasAI(llm)
+    st.write(df)
+    #get the text from the user
+    text = st.text_input('Enter your question')
+    #get the answer
+    answer = pandas_ai(df, prompt=text)
+    #answer can be a pandas dataframe or plot
+    st.write(answer)
+
+    #get the text from the user
+
+
 page_to_show = {
     "School Maps": school_maps,
+    "Analysis AI": pandas_AI
 }
 name_page = st.sidebar.selectbox("Go to", page_to_show.keys())
 page_to_show[name_page]()
