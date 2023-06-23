@@ -169,7 +169,7 @@ def school_maps():
         #st.write(df2)
         #convert all none to 0
 
-    # st.write(df2)
+    # st.write(df2)7
 
     m = folium.Map(location=[df2['LAT'].mean(), df2['LON'].mean()], zoom_start=10)
     #let the map cover the whole screen
@@ -187,17 +187,46 @@ def school_maps():
         <p>Pincode:{}</p>
         '''.format(df2.iloc[i]['features__attributes__schname'], df2.iloc[i]['features__attributes__school_typ'], df2.iloc[i]['features__attributes__management'], df2.iloc[i]['features__attributes__sdtname'], df2.iloc[i]['features__attributes__pincode'])
         iframe = folium.IFrame(html=html, width=200, height=200)
-        folium.Marker(
-            location=[df2.iloc[i]['LAT'], df2.iloc[i]['LON']],
-            popup=folium.Popup(iframe, max_width=200),
-            icon=folium.Icon(color='green', icon='info-sign')
-        ).add_to(m)
+        if 'NSQF?' in df2.columns:
+            if df2.iloc[i]['NSQF?'] == 'yes' and df2.iloc[i]['Vocational'] == 'no':
+                folium.Marker(
+                    location=[df2.iloc[i]['LAT'], df2.iloc[i]['LON']],
+                    popup=folium.Popup(iframe, max_width=200),
+                    icon=folium.Icon(color='red', icon='info-sign')
+                ).add_to(m)
+            elif df2.iloc[i]['Vocational'] == 'yes' and df2.iloc[i]['NSQF?'] == 'no':
+                folium.Marker(
+                    location=[df2.iloc[i]['LAT'], df2.iloc[i]['LON']],
+                    popup=folium.Popup(iframe, max_width=200),
+                    icon=folium.Icon(color='blue', icon='info-sign')
+                ).add_to(m)
+            elif df2.iloc[i]['Vocational'] == 'yes' and df2.iloc[i]['NSQF?'] == 'yes':
+                folium.Marker(
+                    location=[df2.iloc[i]['LAT'], df2.iloc[i]['LON']],
+                    popup=folium.Popup(iframe, max_width=200),
+                    icon=folium.Icon(color='black', icon='info-sign')
+                ).add_to(m)
+        else:
+            folium.Marker(
+                location=[df2.iloc[i]['LAT'], df2.iloc[i]['LON']],
+                popup=folium.Popup(iframe, max_width=200),
+                icon=folium.Icon(color='green', icon='info-sign')
+            ).add_to(m)
     folium_static(m)
+
+    #show legend outside map show color and what it means
+    if 'NSQF?' in df2.columns:
+        st.write("Red: NSQF, Blue: Vocational, Black: Both, Green: Neither")
+
+
+
+
 
 import matplotlib.pyplot as plt
 def pandas_AI():
     #get gpt api key
-    gpt_key = st.secrets['gpt_key']
+    # gpt_key = st.secrets['gpt_key']
+    gpt_key = "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"
     # Sample DataFrame
     path = './blocks/LUDHIANA.xlsx'
     df = pd.read_excel(path,sheet_name='Database', header=1)
@@ -210,10 +239,12 @@ def pandas_AI():
     st.write(df)
     #get the text from the user
     text = st.text_input('Enter your question')
-    #get the answer
-    answer = pandas_ai(df, prompt=text)
+    #get the answer from pandasai
+    answer = pandas_ai.run(df, text)
+
     #answer can be a pandas dataframe or plot
     st.write(answer)
+
 
     #get the text from the user
 

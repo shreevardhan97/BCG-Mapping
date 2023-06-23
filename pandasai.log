@@ -269,3 +269,416 @@ plt.show()
 plt.close('all')
 ```
 2023-06-19 01:19:33 [INFO] Answer: None
+2023-06-19 10:15:02 [INFO] Running PandasAI with openai LLM...
+2023-06-19 10:15:02 [INFO] Prompt ID: dcfdb2c3-0674-4133-a62d-a5184ffb5693
+2023-06-19 10:15:02 [INFO] Using cached response
+2023-06-19 10:15:02 [INFO] 
+Code running:
+```
+print('Shape of the dataframe:', df.shape)
+print('Column names of the dataframe:', list(df.columns))
+print('Data types of the columns:\n', df.dtypes)
+print('First 5 rows of the dataframe:\n', df.head())
+```
+2023-06-19 10:15:02 [INFO] Answer: ('First 5 rows of the dataframe:\n',   DISTRICT_NAME Block Name  ... XI-XII Total.16  Total.17
+0     AMRITSAR    AJNALA-1  ...             NaN       NaN
+1     AMRITSAR    AJNALA-1  ...             NaN       NaN
+2     AMRITSAR    AJNALA-1  ...             NaN       NaN
+3     AMRITSAR    AJNALA-1  ...             NaN       NaN
+4     AMRITSAR    AJNALA-1  ...             NaN       NaN
+
+[5 rows x 380 columns])
+2023-06-19 10:15:24 [INFO] Running PandasAI with openai LLM...
+2023-06-19 10:15:24 [INFO] Prompt ID: 62ee1b6b-80a3-4e51-aaf0-f43d1480a9be
+2023-06-19 10:15:34 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+
+# read the data into a pandas dataframe
+df = pd.read_csv('data.csv')
+
+# filter the data for Sangrur district
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+
+# find the largest school in terms of total number of students
+largest_school = sangrur_df.loc[sangrur_df['Total.17'].idxmax()]
+
+# print the name of the largest school and its total number of students
+print("The largest school in Sangrur is", largest_school['School Name'], "with a total of", largest_school['Total.17'], "students.")
+                        ```
+                    
+2023-06-19 10:15:34 [INFO] 
+Code running:
+```
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+largest_school = sangrur_df.loc[sangrur_df['Total.17'].idxmax()]
+print('The largest school in Sangrur is', largest_school['School Name'],
+    'with a total of', largest_school['Total.17'], 'students.')
+```
+2023-06-19 10:15:56 [INFO] Answer: 
+2023-06-19 11:23:57 [INFO] Running PandasAI with openai LLM...
+2023-06-19 11:23:57 [INFO] Prompt ID: e06c14af-2950-4ae2-8a41-299e70660051
+2023-06-19 11:23:57 [INFO] Using cached response
+2023-06-19 11:23:57 [INFO] 
+Code running:
+```
+print('Shape of the dataframe:', df.shape)
+print('Column names of the dataframe:', list(df.columns))
+print('Data types of the columns:\n', df.dtypes)
+print('First 5 rows of the dataframe:\n', df.head())
+```
+2023-06-19 11:23:57 [INFO] Answer: ('First 5 rows of the dataframe:\n',   DISTRICT_NAME Block Name  ... XI-XII Total.16  Total.17
+0     AMRITSAR    AJNALA-1  ...             NaN       NaN
+1     AMRITSAR    AJNALA-1  ...             NaN       NaN
+2     AMRITSAR    AJNALA-1  ...             NaN       NaN
+3     AMRITSAR    AJNALA-1  ...             NaN       NaN
+4     AMRITSAR    AJNALA-1  ...             NaN       NaN
+
+[5 rows x 380 columns])
+2023-06-19 11:24:27 [INFO] Running PandasAI with openai LLM...
+2023-06-19 11:24:27 [INFO] Prompt ID: e7ca0bf3-cbcb-4310-b205-348990ae0ab3
+2023-06-19 11:24:36 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+
+# read the data into a pandas dataframe
+df = pd.read_csv('data.csv')
+
+# filter the data for Sangrur district
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+
+# calculate the total number of students for each school
+sangrur_df['total_students'] = sangrur_df.iloc[:, 7:].sum(axis=1)
+
+# find the largest school in terms of total number of students
+largest_school = sangrur_df.loc[sangrur_df['total_students'].idxmax()]
+
+# print the name of the largest school and its total number of students
+print("The largest school in Sangrur is", largest_school['SCHOOL_NAME'], "with a total of", largest_school['total_students'], "students.")
+                        ```
+                    
+2023-06-19 11:24:36 [INFO] 
+Code running:
+```
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+sangrur_df['total_students'] = sangrur_df.iloc[:, 7:].sum(axis=1)
+largest_school = sangrur_df.loc[sangrur_df['total_students'].idxmax()]
+print('The largest school in Sangrur is', largest_school['SCHOOL_NAME'],
+    'with a total of', largest_school['total_students'], 'students.')
+```
+2023-06-19 11:25:00 [INFO] Answer: 
+2023-06-19 11:25:15 [INFO] Running PandasAI with openai LLM...
+2023-06-19 11:25:15 [INFO] Prompt ID: b84b3e75-01d5-4b8d-8a9e-0a7cc80fb0ea
+2023-06-19 11:25:25 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+
+# read the data into a pandas dataframe
+df = pd.read_csv('data.csv')
+
+# filter the data to only include schools in Sangrur district
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+
+# create a new column that sums up the total number of students for each school
+sangrur_df['total_students'] = sangrur_df.iloc[:, 7:].sum(axis=1)
+
+# find the row with the largest total number of students
+largest_school = sangrur_df.loc[sangrur_df['total_students'].idxmax()]
+
+# print the name of the largest school and its total number of students
+print("The largest school in terms of total number of students in Sangrur is", largest_school['SCHOOL_NAME'], "with", largest_school['total_students'], "students.")
+                        ```
+                    
+2023-06-19 11:25:25 [INFO] 
+Code running:
+```
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+sangrur_df['total_students'] = sangrur_df.iloc[:, 7:].sum(axis=1)
+largest_school = sangrur_df.loc[sangrur_df['total_students'].idxmax()]
+print('The largest school in terms of total number of students in Sangrur is',
+    largest_school['SCHOOL_NAME'], 'with', largest_school['total_students'],
+    'students.')
+```
+2023-06-19 11:25:52 [INFO] Answer: 
+2023-06-19 11:26:49 [INFO] Running PandasAI with openai LLM...
+2023-06-19 11:26:49 [INFO] Prompt ID: 2ad57a02-43e6-41f8-a232-1095d58ccef7
+2023-06-19 11:26:57 [INFO] 
+                        Code generated:
+                        ```
+                        # Filter the dataframe to only include Sangrur district
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+
+# Create a new column that sums up the total number of students for each school
+sangrur_df['Total Students'] = sangrur_df.iloc[:, 7:].sum(axis=1)
+
+# Find the row with the largest total number of students
+largest_school = sangrur_df.loc[sangrur_df['Total Students'].idxmax()]
+
+# Print the name of the largest school and its total number of students
+print("The largest school in terms of total number of students in Sangrur is", largest_school['School Name'], "with", largest_school['Total Students'], "students.")
+                        ```
+                    
+2023-06-19 11:26:57 [INFO] 
+Code running:
+```
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+sangrur_df['Total Students'] = sangrur_df.iloc[:, 7:].sum(axis=1)
+largest_school = sangrur_df.loc[sangrur_df['Total Students'].idxmax()]
+print('The largest school in terms of total number of students in Sangrur is',
+    largest_school['School Name'], 'with', largest_school['Total Students'],
+    'students.')
+```
+2023-06-19 11:27:22 [INFO] Answer: 
+2023-06-19 11:27:36 [INFO] Running PandasAI with openai LLM...
+2023-06-19 11:27:36 [INFO] Prompt ID: 934dd8d9-797c-46c9-8436-f6fdde52e38e
+2023-06-19 11:27:46 [INFO] 
+                        Code generated:
+                        ```
+                        import pandas as pd
+
+# read the data into a pandas dataframe
+df = pd.read_csv('data.csv')
+
+# filter the data for Sangrur district
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+
+# calculate the total number of students for each school
+sangrur_df['total_students'] = sangrur_df.iloc[:, 7:].sum(axis=1)
+
+# find the largest school in terms of total number of students
+largest_school = sangrur_df.loc[sangrur_df['total_students'].idxmax()]
+
+# print the name of the largest school and its total number of students
+print("The largest school in Sangrur is", largest_school['SCHOOL_NAME'], "with a total of", int(largest_school['total_students']), "students.")
+                        ```
+                    
+2023-06-19 11:27:46 [INFO] 
+Code running:
+```
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+sangrur_df['total_students'] = sangrur_df.iloc[:, 7:].sum(axis=1)
+largest_school = sangrur_df.loc[sangrur_df['total_students'].idxmax()]
+print('The largest school in Sangrur is', largest_school['SCHOOL_NAME'],
+    'with a total of', int(largest_school['total_students']), 'students.')
+```
+2023-06-19 11:28:08 [INFO] Answer: 
+2023-06-19 11:28:22 [INFO] Running PandasAI with openai LLM...
+2023-06-19 11:28:22 [INFO] Prompt ID: 09b5f5f5-33aa-4099-93b1-12451b4f6851
+2023-06-19 11:28:22 [INFO] Using cached response
+2023-06-19 11:28:22 [INFO] 
+Code running:
+```
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+sangrur_df['total_students'] = sangrur_df.iloc[:, 7:].sum(axis=1)
+largest_school = sangrur_df.loc[sangrur_df['total_students'].idxmax()]
+print('The largest school in Sangrur is', largest_school['SCHOOL_NAME'],
+    'with a total of', int(largest_school['total_students']), 'students.')
+```
+2023-06-19 11:29:10 [INFO] error_code=None error_message='That model is currently overloaded with other requests. You can retry your request, or contact us through our help center at help.openai.com if the error persists. (Please include the request ID b87fba42b5b7448c31293fddfc79aacf in your message.)' error_param=None error_type=server_error message='OpenAI API error received' stream_error=False
+2023-06-19 11:29:49 [INFO] Running PandasAI with openai LLM...
+2023-06-19 11:29:49 [INFO] Prompt ID: 99de0daa-6da8-4d28-a23e-727b8fdbe554
+2023-06-19 11:29:49 [INFO] Using cached response
+2023-06-19 11:29:49 [INFO] 
+Code running:
+```
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+sangrur_df['Total Students'] = sangrur_df.iloc[:, 7:].sum(axis=1)
+largest_school = sangrur_df.loc[sangrur_df['Total Students'].idxmax()]
+print('The largest school in terms of total number of students in Sangrur is',
+    largest_school['School Name'], 'with', largest_school['Total Students'],
+    'students.')
+```
+2023-06-19 11:29:58 [INFO] Answer: ('The largest school in terms of total number of students in Sangrur is', 'SHAHEED UDHAM SINGH GOVERNMENT GIRLS SENIOR SECONDARY SCHOOL, SUNAM UDHAM SINGH WALA', 'with', 8958.96239819263, 'students.')
+2023-06-19 11:31:10 [INFO] Running PandasAI with openai LLM...
+2023-06-19 11:31:10 [INFO] Prompt ID: 2e51f1cb-042b-4579-a320-b7acd4876a3b
+2023-06-19 11:31:17 [INFO] 
+                        Code generated:
+                        ```
+                        # Importing necessary libraries
+import pandas as pd
+
+# Reading the dataframe
+df = pd.read_csv('data.csv')
+
+# Filtering the data for Sangrur district
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+
+# Grouping the data by Block Name and counting the number of schools in each block
+block_school_count = sangrur_df.groupby('Block Name')['School Name'].count()
+
+# Finding the block with maximum number of schools
+max_block = block_school_count.idxmax()
+
+# Printing the block name with maximum number of schools
+print(max_block)
+                        ```
+                    
+2023-06-19 11:31:17 [INFO] 
+Code running:
+```
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+block_school_count = sangrur_df.groupby('Block Name')['School Name'].count()
+max_block = block_school_count.idxmax()
+print(max_block)
+```
+2023-06-19 11:31:36 [INFO] Answer: 
+2023-06-19 11:31:53 [INFO] Running PandasAI with openai LLM...
+2023-06-19 11:31:53 [INFO] Prompt ID: 622a1617-1e31-48d4-bcb9-b98d52bfe3d0
+2023-06-19 11:31:58 [INFO] 
+                        Code generated:
+                        ```
+                        # Importing pandas library
+import pandas as pd
+
+# Reading the dataframe
+df = pd.read_csv('data.csv')
+
+# Filtering the data for Sangrur district
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+
+# Grouping the data by Block Name and counting the number of schools in each block
+block_school_count = sangrur_df.groupby('Block Name')['School Name'].count()
+
+# Finding the block with maximum number of schools
+max_block = block_school_count.idxmax()
+
+# Printing the block name with maximum number of schools
+print(max_block)
+                        ```
+                    
+2023-06-19 11:31:59 [INFO] 
+Code running:
+```
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+block_school_count = sangrur_df.groupby('Block Name')['School Name'].count()
+max_block = block_school_count.idxmax()
+print(max_block)
+```
+2023-06-19 11:32:20 [INFO] Answer: 
+2023-06-19 11:45:50 [INFO] Running PandasAI with openai LLM...
+2023-06-19 11:45:50 [INFO] Prompt ID: 1c62d87a-b41d-4061-aab7-30a64ce4ec0f
+2023-06-19 11:45:50 [INFO] Using cached response
+2023-06-19 11:45:50 [INFO] 
+Code running:
+```
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+block_school_count = sangrur_df.groupby('Block Name')['School Name'].count()
+max_block = block_school_count.idxmax()
+print(max_block)
+```
+2023-06-19 11:45:50 [WARNING] Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fcca328c5b0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known')': /v1/chat/completions
+2023-06-19 11:45:50 [WARNING] Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fcca328c850>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known')': /v1/chat/completions
+2023-06-19 12:59:26 [INFO] Running PandasAI with openai LLM...
+2023-06-19 12:59:26 [INFO] Prompt ID: 3615d62e-121e-4310-b57d-4dd5aab1aa44
+2023-06-19 12:59:33 [INFO] 
+                        Code generated:
+                        ```
+                        # Importing necessary libraries
+import pandas as pd
+
+# Reading the dataframe
+df = pd.read_csv('data.csv')
+
+# Grouping the data by Block Name and counting the number of schools in each block
+block_school_count = df.groupby('Block Name')['School Name'].count()
+
+# Finding the block with maximum number of schools
+max_block = block_school_count.idxmax()
+
+# Printing the block name with maximum number of schools
+print("Block with most number of schools in Sangrur: ", max_block)
+                        ```
+                    
+2023-06-19 12:59:33 [INFO] 
+Code running:
+```
+block_school_count = df.groupby('Block Name')['School Name'].count()
+max_block = block_school_count.idxmax()
+print('Block with most number of schools in Sangrur: ', max_block)
+```
+2023-06-19 12:59:52 [INFO] Answer: 
+2023-06-19 13:01:29 [INFO] Running PandasAI with openai LLM...
+2023-06-19 13:01:29 [INFO] Prompt ID: 51af3f53-2ad4-463a-80ea-0194d0755171
+2023-06-19 13:01:29 [INFO] Using cached response
+2023-06-19 13:01:29 [INFO] 
+Code running:
+```
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+block_school_count = sangrur_df.groupby('Block Name')['School Name'].count()
+max_block = block_school_count.idxmax()
+print(max_block)
+```
+2023-06-19 13:01:49 [INFO] Answer: 
+2023-06-19 13:02:34 [INFO] Running PandasAI with openai LLM...
+2023-06-19 13:02:34 [INFO] Prompt ID: 9dcb002b-850c-47f8-984c-256c8c79a2e3
+2023-06-19 13:02:34 [INFO] Using cached response
+2023-06-19 13:02:34 [INFO] 
+Code running:
+```
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+block_school_count = sangrur_df.groupby('Block Name')['School Name'].count()
+max_block = block_school_count.idxmax()
+print(max_block)
+```
+2023-06-19 13:02:55 [INFO] Answer: 
+2023-06-19 13:04:22 [INFO] Running PandasAI with openai LLM...
+2023-06-19 13:04:22 [INFO] Prompt ID: 258f6c2c-1a62-4db4-9b36-47d7f99b5267
+2023-06-19 13:04:31 [INFO] 
+                        Code generated:
+                        ```
+                        # Importing pandas library
+import pandas as pd
+
+# Reading the dataframe
+df = pd.read_csv('data.csv')
+
+# Filtering the data for Sangrur district
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+
+# Grouping the data by Block Name and counting the number of schools in each block
+block_school_count = sangrur_df.groupby('Block Name')['School Name'].count()
+
+# Finding the block with maximum number of schools
+max_block = block_school_count.idxmax()
+
+print("The block with most number of schools in Sangrur is:", max_block)
+                        ```
+                    
+2023-06-19 13:04:31 [INFO] 
+Code running:
+```
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+block_school_count = sangrur_df.groupby('Block Name')['School Name'].count()
+max_block = block_school_count.idxmax()
+print('The block with most number of schools in Sangrur is:', max_block)
+```
+2023-06-19 13:05:12 [INFO] Answer: 
+2023-06-19 13:23:27 [INFO] Running PandasAI with openai LLM...
+2023-06-19 13:23:27 [INFO] Prompt ID: 5bfbcfa0-9c09-4190-83fc-fdc20f675b3e
+2023-06-19 13:23:27 [INFO] Using cached response
+2023-06-19 13:23:27 [INFO] 
+Code running:
+```
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+block_school_count = sangrur_df.groupby('Block Name')['School Name'].count()
+max_block = block_school_count.idxmax()
+print('The block with most number of schools in Sangrur is:', max_block)
+```
+2023-06-19 13:23:27 [WARNING] Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fcc914f0d90>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known')': /v1/chat/completions
+2023-06-19 13:23:27 [WARNING] Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fcc914f13c0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known')': /v1/chat/completions
+2023-06-19 13:37:48 [INFO] Running PandasAI with openai LLM...
+2023-06-19 13:37:48 [INFO] Prompt ID: 7d407dcf-b79c-42f9-a1a2-50fee141d7f7
+2023-06-19 13:37:48 [INFO] Using cached response
+2023-06-19 13:37:48 [INFO] 
+Code running:
+```
+sangrur_df = df[df['DISTRICT_NAME'] == 'SANGRUR']
+block_school_count = sangrur_df.groupby('Block Name')['School Name'].count()
+max_block = block_school_count.idxmax()
+print('The block with most number of schools in Sangrur is:', max_block)
+```
+2023-06-19 13:37:48 [WARNING] Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fcc91519060>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known')': /v1/chat/completions
+2023-06-19 13:37:48 [WARNING] Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fcc9151bca0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known')': /v1/chat/completions
