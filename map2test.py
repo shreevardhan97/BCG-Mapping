@@ -225,8 +225,7 @@ def school_maps():
 import matplotlib.pyplot as plt
 def pandas_AI():
     #get gpt api key
-    # gpt_key = st.secrets['gpt_key']
-    gpt_key = "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"
+    gpt_key = st.secrets['gpt_key']
     # Sample DataFrame
     path = './blocks/LUDHIANA.xlsx'
     df = pd.read_excel(path,sheet_name='Database', header=1)
