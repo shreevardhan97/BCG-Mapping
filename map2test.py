@@ -188,6 +188,17 @@ def school_maps():
         '''.format(df2.iloc[i]['features__attributes__schname'], df2.iloc[i]['features__attributes__school_typ'], df2.iloc[i]['features__attributes__management'], df2.iloc[i]['features__attributes__sdtname'], df2.iloc[i]['features__attributes__pincode'])
         iframe = folium.IFrame(html=html, width=200, height=200)
         if 'NSQF?' in df2.columns:
+            html = '''
+            <h3>School Name:{}</h3>
+            <p>Type:{}</p>
+            <p>Management:{}</p>
+            <p>Location:{}</p>
+            <p>Pincode:{}</p>
+            <p>NSQF:{}</p>
+            <p>Vocational:{}</p>
+            '''.format(df2.iloc[i]['features__attributes__schname'], df2.iloc[i]['features__attributes__school_typ'], df2.iloc[i]['features__attributes__management'], df2.iloc[i]['Block Name'], df2.iloc[i]['features__attributes__pincode'], df2.iloc[i]['NSQF?'], df2.iloc[i]['Vocational'])
+            iframe = folium.IFrame(html=html, width=200, height=200)
+            #add markers with different colors for nsqf and vocational
             if df2.iloc[i]['NSQF?'] == 'yes' and df2.iloc[i]['Vocational'] == 'no':
                 folium.Marker(
                     location=[df2.iloc[i]['LAT'], df2.iloc[i]['LON']],
